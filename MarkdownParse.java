@@ -14,10 +14,30 @@ public class MarkdownParse {
 
         for(String line: lines){
             int start = line.indexOf("](");
-            int end = 0;
+            int openparCounter = 0;
+            int parstart = line.indexOf("](") + 2; //starts index at ](
+            int endpar;
+            
             if(start > -1){
-                end = line.substring(start).indexOf(")");
-                toReturn.add(line.substring(start + 2, start + end));
+                while(line.substring(parstart).contains("(")){
+                    openparCounter++;
+                    parstart += (line.substring(parstart).indexOf("(") + 1);
+                }
+
+                if(openparCounter == 0){ 
+                    endpar = line.substring(start).indexOf(")") + 1;
+                }else{
+                    //updates paranthesis to the amount of 
+                    endpar = line.substring(start).indexOf(")") + 1;            
+                    for(int i = 0; i <= openparCounter; i++){
+                        if(line.substring(endpar + 1).contains(")")){
+                            endpar += line.substring(endpar + 1).indexOf(")") + 1;                    
+                        }else{
+                            break;
+                        }
+                    }
+                }
+                toReturn.add(line.substring(start + 2, start + endpar - 1));
             }
         }
         return toReturn;        
