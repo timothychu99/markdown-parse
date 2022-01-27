@@ -12,7 +12,7 @@ public class MarkdownParseTest {
     ArrayList<String> testLinks = new ArrayList<>();
 
     @Before
-    public void setup(){
+    public void setup() throws IOException{
         String file = "test-file.md";
         for(int i = 1; i <= 8; i++){
             if(i > 1) file = "test-file" + i + ".md";
