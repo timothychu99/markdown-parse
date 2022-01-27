@@ -8,24 +8,70 @@ import java.io.IOException;
 
 public class MarkdownParseTest {
     Path fileName = Path.of("test-file8.md");
-    String contents;
+    ArrayList<String> contents = new ArrayList<>(8);
     ArrayList<String> testLinks = new ArrayList<>();
 
     @Before
     public void setup() throws IOException{
-        contents = Files.readString(fileName);
+        String file = "test-file.md";
+        for(int i = 1; i <= 8; i++){
+            if(i > 1) file = "test-file" + i + ".md";
+            fileName = Path.of(file);
+            contents.add(Files.readString(fileName));
+        }
     }
+    
 
     @Test //tells junit there is start to a test
     public void addition() { //method to test
         assertEquals(2, 1 + 1); //see if 1+1 = 2
     }
+
     @Test
-    public void customTest() {
-        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents);
-        //testLinks.add("https://something.com");
-        //testLinks.add("some-page.html");
-        //testLinks.add("page.com");
+    public void test1() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(0));
+        testLinks.add("https://something.com");
+        testLinks.add("some-page.html");
+        assertEquals(testLinks, linksReturned);
+    }
+
+    @Test
+    public void test2() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(1));
+        testLinks.add("https://something.com");
+        testLinks.add("some-page.html");
+        assertEquals(testLinks, linksReturned);
+    }
+    @Test
+    public void test3() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(2));
+        assertEquals(testLinks, linksReturned);
+    }
+    @Test
+    public void test4() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(3));
+        assertEquals(testLinks, linksReturned);
+    }
+    @Test
+    public void test5() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(4));
+        assertEquals(testLinks, linksReturned);
+    }
+    @Test
+    public void test6() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(5));
+        testLinks.add("page.com");
+        assertEquals(testLinks, linksReturned);
+    }
+    @Test
+    public void test7() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(6));
+        assertEquals(testLinks, linksReturned);
+    }
+    @Test
+    public void test8() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(7));
+        testLinks.add("a link on the first line");
         assertEquals(testLinks, linksReturned);
     }
 }

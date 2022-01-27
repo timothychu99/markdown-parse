@@ -17,7 +17,6 @@ public class MarkdownParse {
             int end = 0;
             if(start > -1){
                 end = line.substring(start).indexOf(")");
-                System.out.println(line.substring(start + 2, start + end));
                 toReturn.add(line.substring(start + 2, start + end));
             }
         }
