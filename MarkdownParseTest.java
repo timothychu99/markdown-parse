@@ -8,11 +8,11 @@ import java.io.IOException;
 
 public class MarkdownParseTest {
     Path fileName = Path.of("test-file8.md");
-    ArrayList<String> contents = new ArrayList<>(8);
+    ArrayList<String> contents = new ArrayList<>();
     ArrayList<String> testLinks = new ArrayList<>();
 
     @Before
-    public void setup() throws IOException{
+    public void setup(){
         String file = "test-file.md";
         for(int i = 1; i <= 8; i++){
             if(i > 1) file = "test-file" + i + ".md";
@@ -21,12 +21,6 @@ public class MarkdownParseTest {
         }
     }
     
-
-    @Test //tells junit there is start to a test
-    public void addition() { //method to test
-        assertEquals(2, 1 + 1); //see if 1+1 = 2
-    }
-
     @Test
     public void test1() {
         ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(0));
