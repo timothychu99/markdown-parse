@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class MarkdownParseTest {
-    Path fileName = Path.of("new-file.md");
+    Path fileName = Path.of("test-file8.md");
     String contents;
     ArrayList<String> testLinks = new ArrayList<>();
 
@@ -23,8 +23,9 @@ public class MarkdownParseTest {
     @Test
     public void customTest() {
         ArrayList<String> linksReturned = MarkdownParse.getLinks(contents);
-        testLinks.add("https://something.com");
-        testLinks.add("some-page.html");
+        //testLinks.add("https://something.com");
+        //testLinks.add("some-page.html");
+        //testLinks.add("page.com");
         assertEquals(testLinks, linksReturned);
     }
 }
