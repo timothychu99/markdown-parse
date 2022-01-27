@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class MarkdownParseTest {
-    Path fileName = Path.of("test-file8.md");
+    Path fileName;
     ArrayList<String> contents = new ArrayList<>();
     ArrayList<String> testLinks = new ArrayList<>();
 
     @Before
     public void setup() throws IOException{
         String file = "test-file.md";
-        for(int i = 1; i <= 8; i++){
+        for(int i = 1; i <= 9; i++){
             if(i > 1) file = "test-file" + i + ".md";
             fileName = Path.of(file);
             contents.add(Files.readString(fileName));
@@ -66,6 +66,12 @@ public class MarkdownParseTest {
     public void test8() {
         ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(7));
         testLinks.add("a link on the first line");
+        assertEquals(testLinks, linksReturned);
+    }
+    @Test
+    public void test9() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(8));
+        testLinks.add("page(1).com");
         assertEquals(testLinks, linksReturned);
     }
 }
