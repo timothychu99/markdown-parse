@@ -65,7 +65,6 @@ public class MarkdownParseTest {
     @Test
     public void test8() {
         ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(7));
-        testLinks.add("a link on the first line");
         assertEquals(testLinks, linksReturned);
     }
     @Test

@@ -45,7 +45,9 @@ public class MarkdownParse {
                         }
                     }
                 }
-                toReturn.add(line.substring(start + 2, start + endpar - 1));
+                if(!line.substring(start + 2, start + endpar - 1).contains(" ")){
+                  toReturn.add(line.substring(start + 2, start + endpar - 1));
+                }
             }
             if(nextStartTrue){
               line = line.substring(nextStart);
