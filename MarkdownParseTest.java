@@ -14,7 +14,7 @@ public class MarkdownParseTest {
     @Before
     public void setup() throws IOException{
         String file = "test-file.md";
-        for(int i = 1; i <= 9; i++){
+        for(int i = 1; i <= 10; i++){
             if(i > 1) file = "test-file" + i + ".md";
             fileName = Path.of(file);
             contents.add(Files.readString(fileName));
@@ -73,5 +73,12 @@ public class MarkdownParseTest {
         ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(8));
         testLinks.add("page(1).com");
         assertEquals(testLinks, linksReturned);
+    }
+    @Test
+    public void test10() {
+        ArrayList<String> linksReturned = MarkdownParse.getLinks(contents.get(9));
+        testLinks.add("page.com");
+        testLinks.add("page.com");
+        assertEquals(contents.get(9)+ "", testLinks, linksReturned);
     }
 }

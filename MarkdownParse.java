@@ -13,13 +13,21 @@ public class MarkdownParse {
         String[] lines = markdown.split("\n");
 
         for(String line: lines){
+          boolean nextStartTrue = true;
+          while(nextStartTrue){
+            nextStartTrue = false;
             int start = line.indexOf("](");
+            int nextStart = line.length() - 1;
             int openparCounter = 0;
             int parstart = line.indexOf("](") + 2; //starts index at ](
             int endpar;
-            
+             
             if(start > -1){
-                while(line.substring(parstart).contains("(")){
+                if(line.substring(parstart).contains("](")){
+                    nextStartTrue = true;
+                    nextStart = line.substring(parstart).indexOf("](");
+                }
+                while(line.substring(parstart, nextStart).contains("(")){
                     openparCounter++;
                     parstart += (line.substring(parstart).indexOf("(") + 1);
                 }
@@ -39,6 +47,10 @@ public class MarkdownParse {
                 }
                 toReturn.add(line.substring(start + 2, start + endpar - 1));
             }
+            if(nextStartTrue){
+              line = line.substring(nextStart);
+            }
+          }
         }
         return toReturn;        
     }
