@@ -21,11 +21,16 @@ public class MarkdownParse {
             int openparCounter = 0;
             int parstart = line.indexOf("](") + 2; //starts index at ](
             int endpar;
-             
+
             if(start > -1){
                 if(line.substring(parstart).contains("](")){
                     nextStartTrue = true;
                     nextStart = line.substring(parstart).indexOf("](");
+                }
+                try{
+                    boolean hi = line.substring(parstart, nextStart).contains("(");
+                }catch(Exception e){
+                    break;
                 }
                 while(line.substring(parstart, nextStart).contains("(")){
                     openparCounter++;
@@ -33,9 +38,6 @@ public class MarkdownParse {
                 }
 
                 if(openparCounter == 0){ 
-                    if(!line.substring(start).contains(")")){
-                        return toReturn;
-                    } 
                     endpar = line.substring(start).indexOf(")") + 1;
                 }else{
                     //updates paranthesis to the amount of 
