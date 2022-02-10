@@ -33,6 +33,9 @@ public class MarkdownParse {
                 }
 
                 if(openparCounter == 0){ 
+                    if(!line.substring(start).contains(")")){
+                        return toReturn;
+                    } 
                     endpar = line.substring(start).indexOf(")") + 1;
                 }else{
                     //updates paranthesis to the amount of 
