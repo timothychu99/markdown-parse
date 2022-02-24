@@ -4,6 +4,7 @@ import org.junit.*; //import junit lib
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import java.io.IOException;
 
 public class MarkdownParseTest {
@@ -80,4 +81,26 @@ public class MarkdownParseTest {
         testLinks.add("page.com");
         assertEquals(contents.get(9)+ "", testLinks, linksReturned);
     }
+
+   @Test
+    public void testSnippet1() throws IOException {
+        String contents= Files.readString(Path.of("./Snippet1.md"));
+        List<String> expect = List.of("`google.com", "google.com", "ucsd.edu");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
+    @Test
+    public void testSnippet2() throws IOException {
+        String contents= Files.readString(Path.of("./Snippet2.md"));
+        List<String> expect = List.of("a.com", "a.com(())", "example.com");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
+
+    @Test
+    public void testSnippet3() throws IOException {
+        String contents= Files.readString(Path.of("./Snippet3.md"));
+        List<String> expect = List.of("https://ucsd-cse15l-w22.github.io/");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    } 
 }
